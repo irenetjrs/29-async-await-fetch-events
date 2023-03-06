@@ -45,3 +45,31 @@ async function getAsyncData (url){
 getAsyncData('https://jsonplaceholder.typicode.com/todos');
 
 // task 3
+
+let userA = document.querySelector('.user-a');
+let userAB = document.querySelector('.user-ab');
+async function getAsyncData(url){
+   try{
+   let result = await fetch(url);
+   if(result.ok){
+      let response = await result.json();
+         let filterA = response.filter((item) => item.title[0]==='a');
+            filterA.forEach((elem) => {
+               let divA = document.createElement('div');
+               divA.textContent = JSON.stringify(elem);
+               userA.append(divA);
+            });
+         console.log(userA);
+            let filterAB = filterA.filter((item) => item.title[0]==='a' && item.title[1]==='b');
+            filterAB.forEach((elem) => {
+               let divAB = document.createElement('div');
+               divAB.textContent = JSON.stringify(elem);
+               userAB.append(divAB);
+            });
+      console.log(userAB);
+      }
+   }catch(error){
+         console.log(error.message);
+      }
+   };
+getAsyncData('https://jsonplaceholder.typicode.com/todos');
